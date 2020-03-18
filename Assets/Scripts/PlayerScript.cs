@@ -146,6 +146,9 @@ namespace MageQuest.Player
 
         private void Die()
         {
+            isPaused = false;
+            Time.timeScale = 1;
+            playerUi.pauseMenu.SetActive(false);
             SceneManager.LoadScene("DeathScreen");
         }
 
