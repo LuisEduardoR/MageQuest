@@ -6,7 +6,8 @@ using MageQuest.Player;
 
 namespace MageQuest.Potions
 {
-        
+    
+    [RequireComponent(typeof(Collider))]
     public class Potion : MonoBehaviour
     {
 
@@ -24,14 +25,18 @@ namespace MageQuest.Potions
                 bool collected = false;
                 PlayerScript player = other.GetComponent<PlayerScript>();
 
-                if(potionType == Type.Health) 
+                switch(potionType)
                 {
-                    collected = player.GiveHealth(amount);
-                }
+                    case Type.Health:
 
-                if(potionType == Type.Mana) 
-                {
-                    collected = player.GiveMana(amount);
+                       collected = player.GiveHealth(amount);
+                       break;
+
+                    case Type.Mana:
+
+                        collected = player.GiveMana(amount);
+                        break;
+
                 }
 
                 if(collected)

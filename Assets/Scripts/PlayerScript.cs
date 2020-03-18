@@ -97,7 +97,7 @@ namespace MageQuest.Player
 
         private void Die()
         {
-            SceneManager.LoadScene("Morte");
+            SceneManager.LoadScene("DeathScreen");
         }
 
         public bool GiveHealth(int amount)
