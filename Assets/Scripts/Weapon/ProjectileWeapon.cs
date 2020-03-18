@@ -13,7 +13,7 @@ namespace MageQuest.Weapons
 
         public override void Fire()
         {
-            if(player.Mana > manaCost)
+            if(player.Mana >= manaCost)
             {
                 Instantiate(projectile, spawn.position, spawn.rotation);
                 base.Fire();

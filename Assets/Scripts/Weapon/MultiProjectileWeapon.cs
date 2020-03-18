@@ -13,7 +13,7 @@ namespace MageQuest.Weapons
 
         public override void Fire()
         {
-            if(player.Mana > manaCost)
+            if(player.Mana >= manaCost)
             {
                 foreach(Transform spawn in spawns)
                 {

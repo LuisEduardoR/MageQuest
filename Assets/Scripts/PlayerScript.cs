@@ -52,9 +52,11 @@ namespace MageQuest.Player
             public GameObject pauseMenu;
 
         }
-        [SerializeField] UI playerUi = null;
+        [SerializeField] protected UI playerUi = null;
 
         public bool isPaused = false;
+
+        [SerializeField] protected AudioSource damageSource;
 
         void Start()
         {
@@ -130,6 +132,11 @@ namespace MageQuest.Player
         public void Damage(int amount)
         {
             Health -= amount;
+            if(!damageSource.isPlaying)
+            {
+                damageSource.Play();
+            }
+
             if(Health == 0)
             {
                 Die();

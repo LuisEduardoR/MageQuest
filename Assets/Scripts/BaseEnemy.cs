@@ -108,6 +108,11 @@ namespace MageQuest.Enemies
 					break;
 				case EnemyType.Darkness:
 
+					if(collision.other.tag != "Arcan")
+					{
+						return;
+					}
+
 					Die();
 
 					break;

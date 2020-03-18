@@ -15,7 +15,7 @@ namespace MageQuest.Weapons
 
         public override void Fire()
         {
-            if(player.Mana > manaCost && player.Health < 100)
+            if(player.Mana >= manaCost && player.Health < 100)
             {
                 player.GiveHealth(healAmount);
                 base.Fire();
