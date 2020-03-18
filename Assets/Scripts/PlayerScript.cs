@@ -48,12 +48,19 @@ namespace MageQuest.Player
         {
             public TMP_Text healthText;
             public TMP_Text manaText;
-        }
-        [SerializeField] UI playerUi;
 
+            public GameObject pauseMenu;
+
+        }
+        [SerializeField] UI playerUi = null;
+
+        public bool isPaused = false;
 
         void Start()
         {
+
+            isPaused = false;
+
             Health = 100;
             Mana = 100;
 
@@ -69,6 +76,23 @@ namespace MageQuest.Player
         void Update()
         {
 
+            if(Input.GetButtonDown("Cancel"))
+            {
+                if(isPaused)
+                {
+                    UnPause();
+                }
+                else
+                {
+                    Pause();
+                }
+            }
+
+            if(isPaused)
+            {
+                return;
+            }
+
             // Allows changing weapons.
             for(int i = 1; i <= weaponObjects.Length; i++)
             {
@@ -83,6 +107,24 @@ namespace MageQuest.Player
                 weaponScripts[currentWeapon].Fire();
             }
 
+        }
+
+        public void Pause()
+        {
+            isPaused = true;
+            Time.timeScale = 0;
+            playerUi.pauseMenu.SetActive(true);
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
+
+        public void UnPause()
+        {
+            isPaused = false;
+            Time.timeScale = 1;
+            playerUi.pauseMenu.SetActive(false);
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
         }
 
         public void Damage(int amount)

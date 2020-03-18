@@ -1,9 +1,12 @@
 using UnityEngine;
 using System.Collections;
 
+using MageQuest.Player;
+
 public class MouseLook : MonoBehaviour {
 	
-	private Transform Player, Cam;
+	private PlayerScript player;
+	private Transform PlayerTransform, Cam;
 	public static float velocidadeRotacao, velocidadeMovimento;
 
 	void Start () {
@@ -11,8 +14,9 @@ public class MouseLook : MonoBehaviour {
 	Screen.lockCursor = true;	
 	velocidadeRotacao = 70f;
 	velocidadeMovimento = 10f;
-		
-	Player = GetComponent<Transform>();
+	
+	player = FindObjectOfType<PlayerScript>();
+	PlayerTransform = player.transform;
 	Cam    = GameObject.FindGameObjectWithTag("Camera").GetComponent<Transform>();
 		
 	}
@@ -20,6 +24,9 @@ public class MouseLook : MonoBehaviour {
 
 	void Update () {
 		
+		if(player.isPaused)
+			return;
+
 	float orientacaoX = Input.GetAxis("Mouse X");
 	float orientacaoY = Input.GetAxis("Mouse Y");
 	
@@ -35,7 +42,7 @@ public class MouseLook : MonoBehaviour {
 	
 		if(orientacaoX != 0){
 			
-		Player.eulerAngles += Vector3.up*Time.deltaTime * orientacaoX * velocidadeRotacao;
+		PlayerTransform.eulerAngles += Vector3.up*Time.deltaTime * orientacaoX * velocidadeRotacao;
 	
 		}	
 	
