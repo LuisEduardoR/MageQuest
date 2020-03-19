@@ -148,7 +148,8 @@ namespace MageQuest.Player
         {
             isPaused = false;
             Time.timeScale = 1;
-            playerUi.pauseMenu.SetActive(false);
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
             SceneManager.LoadScene("DeathScreen");
         }
 
