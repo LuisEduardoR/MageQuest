@@ -58,7 +58,11 @@ namespace MageQuest.Enemies
 			
 			if(collision.collider.tag == "Player")
 			{
-				collision.collider.GetComponent<PlayerScript>().Damage(playerDamage);
+				PlayerScript player = collision.collider.GetComponent<PlayerScript>();
+				if(player != null)
+				{
+					player.Damage(playerDamage);
+				}
 				return;
 			}
 
