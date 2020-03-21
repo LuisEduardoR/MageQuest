@@ -11,7 +11,6 @@ public class MouseLook : MonoBehaviour {
 
 	void Start () {
 		
-	Screen.lockCursor = true;	
 	velocidadeRotacao = 70f;
 	velocidadeMovimento = 10f;
 	

@@ -56,19 +56,19 @@ namespace MageQuest.Enemies
 		void OnCollisionEnter(Collision collision)
 		{
 			
-			if(collision.other.tag == "Player")
+			if(collision.collider.tag == "Player")
 			{
-				collision.other.GetComponent<PlayerScript>().Damage(playerDamage);
+				collision.collider.GetComponent<PlayerScript>().Damage(playerDamage);
 				return;
 			}
 
-			if(collision.other.tag == "Fire" || collision.other.tag == "Ice" || collision.other.tag == "Lightning" || collision.other.tag == "Arcan")
+			if(collision.collider.tag == "Fire" || collision.collider.tag == "Ice" || collision.collider.tag == "Lightning" || collision.collider.tag == "Arcan")
 
 			switch(enemyType)
 			{
 				case EnemyType.Fire:
 
-					if(collision.other.tag == "Fire")
+					if(collision.collider.tag == "Fire")
 					{
 						return;
 					}
@@ -78,7 +78,7 @@ namespace MageQuest.Enemies
 					break;
 				case EnemyType.Ice:
 
-					if(collision.other.tag == "Ice")
+					if(collision.collider.tag == "Ice")
 					{
 						return;
 					}
@@ -88,7 +88,7 @@ namespace MageQuest.Enemies
 					break;
 				case EnemyType.Lightning:
 
-					if(collision.other.tag == "Lightning")
+					if(collision.collider.tag == "Lightning")
 					{
 						return;
 					}
@@ -98,7 +98,7 @@ namespace MageQuest.Enemies
 					break;
 				case EnemyType.Arcane:
 
-					if(collision.other.tag == "Arcan")
+					if(collision.collider.tag == "Arcan")
 					{
 						return;
 					}
@@ -108,7 +108,7 @@ namespace MageQuest.Enemies
 					break;
 				case EnemyType.Darkness:
 
-					if(collision.other.tag != "Arcan")
+					if(collision.collider.tag != "Arcan")
 					{
 						return;
 					}

@@ -55,3 +55,9 @@ Today I tried rewriting the code I lost, only a couple scripts that I had conver
 I also realised I had started working on a second level I hadn't actually released on the original version even with it being pretty much done, the third and final level tough is completly empty, and it's not worth finishing before the jam.
 
 It's not perfectly like the original builds and I wish I still had them, but it's probably as close as it can get, it retains the amateurish and poorly made feel from the original, and it shows me the potential I had if I kept studying. 8 years and a lot of study and experience later and I'm about to try remaking the game in very little time. I'm not touching the project again until the start of the jam, but I will be making and releasing a build to have something to compare the remade project when it's done.
+
+### The Jam
+
+#### 2020-03-21
+
+I ended up not working the first day of the jam due to some things from uni and also because I wasn't in the mood due to the COVID-19 prospects in Brazil... But well, here I am, thinking where to start, guess it will be: trowing away the entire project! Ok, I will keep using the old project, so I can have it as a reference, but I'm pretty much redoing it from scratch, the only reason I was trying to update and fix it the days before was to have a build of the older version as I lost the originals. I'm basicly creating an "Old" folder and putting the original inside it, this makes for some of the files being inside two "Old" folders, because that's exactly what I did in 2014 when I tried remaking for the first time.  
