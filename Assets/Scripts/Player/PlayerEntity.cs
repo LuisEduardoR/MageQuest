@@ -15,6 +15,9 @@ namespace MageQuest.Player
         private PlayerMovimentation movement;
         private PlayerUI ui;
 
+        [SerializeField] private GameObject[] spellObjects;
+        [SerializeField] private int currentSpell;
+
         public override int Health
         {
             get { return health; } 

@@ -6,6 +6,7 @@ namespace MageQuest.Entities
 {
 
     public enum DamageType { Normal }
+    public enum EffectOverTime { HealthRegen, ManaRegen }
 
     public abstract class BaseEntity : MonoBehaviour
     {
@@ -16,7 +17,7 @@ namespace MageQuest.Entities
             get { return health; } 
             set { health = Mathf.Clamp(value, 0, maxHealth); }
         }
-        [SerializeField] protected int maxHealth = 100;
+        public int maxHealth = 100;
 
         [SerializeField] protected int mana = 100;
         public virtual int Mana
@@ -24,7 +25,7 @@ namespace MageQuest.Entities
             get { return health; } 
             set { health = Mathf.Clamp(value, 0, maxMana); }
         }
-        [SerializeField] protected int maxMana = 100;
+        public int maxMana = 100;
 
         [SerializeField] protected float velocity = 5.0f;
 
@@ -36,18 +37,26 @@ namespace MageQuest.Entities
 
         }
 
-        public virtual void Heal(int amount, int period)
+        public virtual void GiveHealth(int amount, int period)
         {
 
-            if(period > 0) StartCoroutine(HealOverTime(amount, period)); // Starts healing subroutine.
-            else Health += amount; // Heals imediatly,
+            if(period > 0) StartCoroutine(GiveOverTime(EffectOverTime.HealthRegen, amount, period)); // Starts giving health overtime subroutine.
+            else Health += amount; // Give all health imediatly,
 
         }
 
-        protected virtual IEnumerator HealOverTime(int amount, int period) {
+        public virtual void GiveMana(int amount, int period)
+        {
 
-            int step = (int)Mathf.Floor(amount / period); // Calculates the amount of health/sec.
-            int curStep = 0; // Stores the amount of times health was given.
+            if(period > 0) StartCoroutine(GiveOverTime(EffectOverTime.ManaRegen, amount, period)); // Starts giving mana overtime subroutine.
+            else Mana += amount; // Give all mana imediatly,
+
+        }
+
+        protected virtual IEnumerator GiveOverTime(EffectOverTime effectOverTime, int amount, int period) {
+
+            int step = (int)Mathf.Floor(amount / period); // Calculates the amount of mana/sec.
+            int curStep = 0; // Stores the amount of times mana was given.
             while(curStep < period)
             {
 
@@ -59,13 +68,39 @@ namespace MageQuest.Entities
                     yield return new WaitForFixedUpdate();
                 }
                 
-                // Heals.
-                Health += step;
+                // Gives the resource effect.
+                switch(effectOverTime)
+                {
+                    case EffectOverTime.HealthRegen:
+
+                        Health += step;
+                        break;
+
+                    case EffectOverTime.ManaRegen:
+                    
+                        Mana += step;
+                        break;
+
+                }
                 curStep++;
                 
             }
 
-            Health += step % period; // Ensures any error from the division will be given to the entity in the end.
+             // Ensures any error from the division will be given to the entity in the end.
+            switch(effectOverTime)
+            {
+                case EffectOverTime.HealthRegen:
+
+                    Health += step % period;
+                    break;
+
+                case EffectOverTime.ManaRegen:
+                
+                    Mana += step % period;
+                    break;
+
+            }
+            
 
         }
 

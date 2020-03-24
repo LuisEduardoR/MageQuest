@@ -60,4 +60,14 @@ It's not perfectly like the original builds and I wish I still had them, but it'
 
 #### 2020-03-21
 
-I ended up not working the first day of the jam due to some things from uni and also because I wasn't in the mood due to the COVID-19 prospects in Brazil... But well, here I am, thinking where to start, guess it will be: trowing away the entire project! Ok, I will keep using the old project, so I can have it as a reference, but I'm pretty much redoing it from scratch, the only reason I was trying to update and fix it the days before was to have a build of the older version as I lost the originals. I'm basicly creating an "Old" folder and putting the original inside it, this makes for some of the files being inside two "Old" folders, because that's exactly what I did in 2014 when I tried remaking for the first time.  
+I ended up not working the first day of the jam due to some things from uni and also because I wasn't in the mood due to the COVID-19 prospects in Brazil... But well, here I am, thinking where to start, guess it will be: trowing away the entire project! Ok, I will keep using the old project, so I can have it as a reference, but I'm pretty much redoing it from scratch, the only reason I was trying to update and fix it the days before was to have a build of the older version as I lost the originals. I'm basicly creating an "Old" folder and putting the original inside it, this makes for some of the files being inside two "Old" folders, because that's exactly what I did in 2014 when I tried remaking for the first time.
+
+For today I started programming a BaseEntity class that the Player along with all enemies would inherit, then I worked on the Player and started testing some concepts for the HUD, I wanted to try making some health and mana bars similar to the ones in Diablo. I started imagining how the new enemies would look like and how I would remake the spells to make the other ones more userfull (seriusly, the best way to play the old one is flood the map with fireballs because they're free, only changing to ice when there is a fire golem, maybe using the arcane, red one, when on the mood).
+
+#### 2020-03-23
+
+- potions
+
+#### 2020-03-24
+
+- enemy models
