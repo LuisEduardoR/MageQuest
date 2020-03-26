@@ -9,8 +9,6 @@ namespace MageQuest.Spells
     public class ProjectileSpell : BaseSpell
     {
 
-        [SerializeField] protected int longCastManaCost = 10;
-
         [SerializeField] protected GameObject shortCastProjectile = null;
         [SerializeField] protected GameObject longCastProjectile = null;
 
@@ -43,16 +41,13 @@ namespace MageQuest.Spells
         public override void LongCast() 
         {
 
-            if(player.Mana >= longCastManaCost)
-            {
-                Instantiate(longCastProjectile, projectileSpawn.position, projectileSpawn.rotation);
+            Instantiate(longCastProjectile, projectileSpawn.position, projectileSpawn.rotation);
 
-                source.Stop();
-                source.clip = longCastSound;
-                source.Play();
+            source.Stop();
+            source.clip = longCastSound;
+            source.Play();
 
-                player.Mana -= longCastManaCost;
-            }
+            player.Mana -= longCastManaCost;
 
         }
 

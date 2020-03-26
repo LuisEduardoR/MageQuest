@@ -80,6 +80,8 @@ namespace MageQuest.Player
                 currentSpell = spell;
             }
 
+            ui.InitializeSpellBar(spells[spell].spellScript);
+
         }
 
         protected override void Die()

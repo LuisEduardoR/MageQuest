@@ -10,18 +10,20 @@ namespace MageQuest.Spells
     public abstract class BaseSpell : MonoBehaviour
     {
         
-        [SerializeField] protected float delayBetweenCasts = 0.1f;
-        protected float castTimer;
+        [SerializeField] protected int longCastManaCost = 10;
 
-        [SerializeField] protected float longCastCharge = 0.3f;
-        protected float longCastTimer;
+        public float delayShortCast = 0.5f;
+        public float delayLongCast = 1.2f;
+
+        [HideInInspector] public float castChargeTime;
+        [HideInInspector] public bool inCooldown;
 
         protected PlayerEntity player;
 
         public virtual void Start() 
         {
-            castTimer = 0;
-            longCastTimer = 0;
+            castChargeTime = 0;
+            inCooldown = false;
 
             player = FindObjectOfType<PlayerEntity>();
         }
@@ -29,21 +31,54 @@ namespace MageQuest.Spells
         public virtual void Update()
         {
             
-            if(castTimer < delayBetweenCasts)
-                castTimer += Time.deltaTime;
-
-            if(Input.GetButton("Fire1") && castTimer >= delayBetweenCasts)
+            if(inCooldown)
             {
-                longCastTimer += Time.deltaTime;
+                castChargeTime -= Time.deltaTime;
+                
+                if(Input.GetButtonDown("Fire1"))
+                {
+                    if(castChargeTime <= 0)
+                    {
+                        castChargeTime = 0;
+                        inCooldown = false;
+                    }
+                }
+
             }
-
-            if(Input.GetButtonUp("Fire1") && castTimer >= delayBetweenCasts)
+            else
             {
-                if(longCastTimer < longCastCharge) ShortCast();
-                else LongCast();
 
-                castTimer = 0;
-                longCastTimer = 0;
+                if(Input.GetButton("Fire1"))
+                {
+                    castChargeTime += Time.deltaTime;
+
+                    if(castChargeTime > delayShortCast && player.Mana < longCastManaCost)
+                    {
+                        ShortCast();
+                        inCooldown = true;
+                        castChargeTime = delayShortCast;
+                    }
+
+                }
+
+                if(Input.GetButtonUp("Fire1") && !inCooldown)
+                {
+
+                    if(castChargeTime < delayShortCast)
+                    {
+                        ShortCast();
+                        castChargeTime = delayShortCast;
+                    }
+                    else
+                    {
+                        LongCast();
+                        castChargeTime = delayLongCast;
+                    }
+
+                    inCooldown = true;
+
+                }
+
             }
             
             

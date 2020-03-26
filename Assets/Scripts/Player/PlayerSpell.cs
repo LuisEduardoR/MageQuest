@@ -8,6 +8,7 @@ namespace MageQuest.Spells
     {
 
         public GameObject spellObject;
+        public BaseSpell spellScript;
         public bool spellEnabled;
 
     }
