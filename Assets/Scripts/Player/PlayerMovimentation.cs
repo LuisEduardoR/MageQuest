@@ -41,7 +41,12 @@ namespace MageQuest.Player
 
             // Moves the player.
             Vector3 input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-            playerRigidbody.velocity = playerVelocity * transform.TransformDirection(input);
+            
+            Vector3 newVel = playerVelocity * transform.TransformDirection(input);
+            float yVel = playerRigidbody.velocity.y;
+            newVel.y = yVel;
+
+            playerRigidbody.velocity = newVel;
 
             // Rotates on the x-axis.
             rotationX += Input.GetAxis("Mouse X") * mouseSensitivity;

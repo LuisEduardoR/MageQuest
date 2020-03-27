@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace MageQuest.Weapons
+namespace MageQuest.Spells
 {
 
     [RequireComponent(typeof(Rigidbody))] 

@@ -16,8 +16,8 @@ namespace MageQuest.Player
         private PlayerMovimentation movement;
         private PlayerUI ui;
 
-        [SerializeField] private PlayerSpell[] spells;
-        [SerializeField] private int currentSpell;
+        [SerializeField] private PlayerSpell[] spells = null;
+        [SerializeField] private int currentSpell = 0;
 
         public override int Health
         {
@@ -46,6 +46,8 @@ namespace MageQuest.Player
 
             ui = GetComponent<PlayerUI>();
 
+            ui.UpdateAvaliableSpell(spells);
+
             currentSpell = 0;
             SetSpell(currentSpell);
 
@@ -56,17 +58,10 @@ namespace MageQuest.Player
         private void Update ()
         {
 
+            // Allows using the number keys to pick a spell.
             for(int i = 1; i <= spells.Length; i++)
-            {
-
-                if(Input.GetKeyDown(i.ToString()))
-                {
-
+                if(Input.GetKeyDown(i.ToString()) && (i - 1) != currentSpell)
                     SetSpell(i - 1);
-
-                }
-
-            }
 
         }
 
@@ -80,7 +75,7 @@ namespace MageQuest.Player
                 currentSpell = spell;
             }
 
-            ui.InitializeSpellBar(spells[spell].spellScript);
+            ui.UpdateCastingBar(spells[spell].spellScript);
 
         }
 

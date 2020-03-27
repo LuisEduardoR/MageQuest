@@ -22,10 +22,13 @@ namespace MageQuest.Spells
 
         public virtual void Start() 
         {
-            castChargeTime = 0;
-            inCooldown = false;
-
             player = FindObjectOfType<PlayerEntity>();
+        }
+
+         public virtual void OnEnable() 
+        {
+            castChargeTime = delayLongCast;
+            inCooldown = true;
         }
 
         public virtual void Update()

@@ -15,13 +15,15 @@ namespace MageQuest.Player
         [SerializeField] protected Image healthPoolGraphic;
         [SerializeField] protected Image manaPoolGraphic;
 
-        [SerializeField] protected Slider spellBarLeft;
-        [SerializeField] protected Image spellbarFillLeft;
+        [SerializeField] protected Slider castingBarLeft;
+        [SerializeField] protected Image castingBarFillLeft;
         [SerializeField] protected Image longCastMarkerLeft;
 
-        [SerializeField] protected Slider spellBarRight;
-        [SerializeField] protected Image spellbarFillRight;
+        [SerializeField] protected Slider castingBarRight;
+        [SerializeField] protected Image castingBarFillRight;
         [SerializeField] protected Image longCastMarkerRight;
+
+        [SerializeField] protected Image[] spellActiveIcons;
 
         private BaseSpell currentSpell;
 
@@ -31,26 +33,26 @@ namespace MageQuest.Player
             // Paint the spell bar the correct color.
             if(currentSpell != null)
             {
-                spellBarLeft.value = currentSpell.castChargeTime;
-                spellBarRight.value = currentSpell.castChargeTime;
+                castingBarLeft.value = currentSpell.castChargeTime;
+                castingBarRight.value = currentSpell.castChargeTime;
 
                 if(!currentSpell.inCooldown)
                 {
                     if(currentSpell.castChargeTime < currentSpell.delayShortCast)
                     {
-                        spellbarFillLeft.color = Color.blue;
-                        spellbarFillRight.color = Color.blue;
+                        castingBarFillLeft.color = Color.blue;
+                        castingBarFillRight.color = Color.blue;
                     }
                     else
                     {
-                        spellbarFillLeft.color = Color.red;
-                        spellbarFillRight.color = Color.red;
+                        castingBarFillLeft.color = Color.red;
+                        castingBarFillRight.color = Color.red;
                     }
                 }
                 else
                 {
-                    spellbarFillLeft.color = Color.gray;
-                    spellbarFillRight.color = Color.gray;
+                    castingBarFillLeft.color = Color.gray;
+                    castingBarFillRight.color = Color.gray;
                 }
 
 
@@ -75,23 +77,31 @@ namespace MageQuest.Player
 
         }
 
-        public void InitializeSpellBar(BaseSpell spell)
+        public void UpdateAvaliableSpell(PlayerSpell[] spells)
+        {
+
+            for(int i = 0; i < spells.Length; i++)
+                spellActiveIcons[i].enabled = spells[i].spellEnabled;
+
+        }
+
+        public void UpdateCastingBar(BaseSpell spell)
         {
 
             // Saves the current spell.
             currentSpell = spell;
 
             // Gets the max value for the bar
-            spellBarLeft.maxValue = spell.delayLongCast;
-            spellBarRight.maxValue = spell.delayLongCast;
+            castingBarLeft.maxValue = spell.delayLongCast;
+            castingBarRight.maxValue = spell.delayLongCast;
 
             // Sets the long cast marker on the bars.
             Vector2 t_pos = longCastMarkerLeft.rectTransform.anchoredPosition;
-            t_pos.x -= spellBarLeft.GetComponent<RectTransform>().rect.width * (spell.delayShortCast / spell.delayLongCast);
+            t_pos.x = -castingBarLeft.GetComponent<RectTransform>().rect.width * (spell.delayShortCast / spell.delayLongCast);
             longCastMarkerLeft.rectTransform.anchoredPosition = t_pos;
 
             t_pos = longCastMarkerRight.rectTransform.anchoredPosition;
-            t_pos.x += spellBarRight.GetComponent<RectTransform>().rect.width * (spell.delayShortCast / spell.delayLongCast);
+            t_pos.x = castingBarRight.GetComponent<RectTransform>().rect.width * (spell.delayShortCast / spell.delayLongCast);
             longCastMarkerRight.rectTransform.anchoredPosition = t_pos;
 
         }
